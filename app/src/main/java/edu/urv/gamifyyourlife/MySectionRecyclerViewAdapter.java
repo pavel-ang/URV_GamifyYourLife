@@ -12,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import edu.urv.gamifyyourlife.model.ModSection;
-import edu.urv.gamifyyourlife.model.SectionsActivity;
 
 import java.util.List;
 
@@ -55,7 +54,9 @@ public class MySectionRecyclerViewAdapter extends RecyclerView.Adapter<MySection
         holder.mCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(activity, "Clicked: " + holder.mItem.content, Toast.LENGTH_SHORT).show();
+                if (activity instanceof SectionsActivity) {
+                    ((SectionsActivity) activity).openObjectives(holder.mItem.id);
+                }
             }
         });
     }
@@ -79,5 +80,6 @@ public class MySectionRecyclerViewAdapter extends RecyclerView.Adapter<MySection
             mIconLevel = view.findViewById(R.id.iconLevel);
             mCardView = view.findViewById(R.id.cardView);
         }
-    }
+    }//
+
 }

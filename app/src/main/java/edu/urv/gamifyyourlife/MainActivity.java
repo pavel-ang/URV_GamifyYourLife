@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import edu.urv.gamifyyourlife.model.DataSource;
 import edu.urv.gamifyyourlife.model.DataSourceFactory;
-import edu.urv.gamifyyourlife.model.SectionsActivity;
 
 public class MainActivity extends AppCompatActivity {
 

@@ -39,4 +39,11 @@ public class SectionsFragment extends Fragment {
         }
         return view;
     }
+    public MySectionRecyclerViewAdapter getAdapter() {
+        RecyclerView recyclerView = (RecyclerView) getView();
+        if (recyclerView != null) {
+            return (MySectionRecyclerViewAdapter) recyclerView.getAdapter();
+        }
+        return null;
+    }
 }

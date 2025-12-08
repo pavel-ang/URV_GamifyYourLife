@@ -12,7 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GamifyYourLife">
         <activity
-            android:name=".model.SectionsActivity"
+            android:name=".ObjectivesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SectionsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
