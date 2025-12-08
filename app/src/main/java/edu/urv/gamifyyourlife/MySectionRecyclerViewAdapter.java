@@ -1,41 +1,63 @@
 package edu.urv.gamifyyourlife;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import edu.urv.gamifyyourlife.placeholder.PlaceholderContent.PlaceholderItem;
-import edu.urv.gamifyyourlife.databinding.FragmentSectionsBinding;
+import edu.urv.gamifyyourlife.model.ModSection;
+import edu.urv.gamifyyourlife.model.SectionsActivity;
 
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link PlaceholderItem}.
- * TODO: Replace the implementation with code for your data type.
- */
 public class MySectionRecyclerViewAdapter extends RecyclerView.Adapter<MySectionRecyclerViewAdapter.ViewHolder> {
 
-    private final List<PlaceholderItem> mValues;
+    private final List<ModSection> mValues;
+    private final Activity activity;
 
-    public MySectionRecyclerViewAdapter(List<PlaceholderItem> items) {
+    public MySectionRecyclerViewAdapter(List<ModSection> items, Activity activity) {
         mValues = items;
+        this.activity = (SectionsActivity) activity;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        return new ViewHolder(FragmentSectionsBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
+        return new ViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.section_item, parent, false));
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mIdView.setText(mValues.get(position).id);
+
         holder.mContentView.setText(mValues.get(position).content);
+
+        if (holder.mItem.id.equals("1")) {
+            holder.mIconSection.setImageResource(R.drawable.sections_1);
+        } else if (holder.mItem.id.equals("2")) {
+            holder.mIconSection.setImageResource(R.drawable.sections_2);
+        } else {
+            holder.mIconSection.setImageResource(R.drawable.sections_3);
+        }
+
+        if (holder.mItem.level == 0.0) {
+            holder.mIconLevel.setImageResource(R.drawable.sad_face);
+        } else {
+            holder.mIconLevel.setImageResource(R.drawable.happy_face);
+        }
+
+        holder.mCardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(activity, "Clicked: " + holder.mItem.content, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -44,19 +66,18 @@ public class MySectionRecyclerViewAdapter extends RecyclerView.Adapter<MySection
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        public final TextView mIdView;
         public final TextView mContentView;
-        public PlaceholderItem mItem;
+        public final ImageView mIconSection;
+        public final ImageView mIconLevel;
+        public final CardView mCardView;
+        public ModSection mItem;
 
-        public ViewHolder(FragmentSectionsBinding binding) {
-            super(binding.getRoot());
-            mIdView = binding.itemNumber;
-            mContentView = binding.content;
-        }
-
-        @Override
-        public String toString() {
-            return super.toString() + " '" + mContentView.getText() + "'";
+        public ViewHolder(View view) {
+            super(view);
+            mContentView = view.findViewById(R.id.content);
+            mIconSection = view.findViewById(R.id.iconSection);
+            mIconLevel = view.findViewById(R.id.iconLevel);
+            mCardView = view.findViewById(R.id.cardView);
         }
     }
 }

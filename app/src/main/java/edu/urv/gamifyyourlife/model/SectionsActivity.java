@@ -1,5 +1,6 @@
 package edu.urv.gamifyyourlife.model;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +13,7 @@ import edu.urv.gamifyyourlife.R;
 
 public class SectionsActivity extends AppCompatActivity {
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
