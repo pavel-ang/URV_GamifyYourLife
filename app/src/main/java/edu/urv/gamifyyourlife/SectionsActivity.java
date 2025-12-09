@@ -18,8 +18,10 @@ public class SectionsActivity extends AppCompatActivity {
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        String section_id = result.getData().getStringExtra("id");
+                        DataSource.getInstance().Recalculate(section_id);
 
-                    if (result.getResultCode() == RESULT_OK) {
                         FragmentManager fragmentManager = getSupportFragmentManager();
                         SectionsFragment myFragment = (SectionsFragment) fragmentManager.findFragmentById(R.id.fragmentContainerView);
                         if (myFragment != null && myFragment.getAdapter() != null) {
@@ -34,10 +36,10 @@ public class SectionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sections);
     }
+
     public void openObjectives(String sectionId) {
         Intent intent = new Intent(this, ObjectivesActivity.class);
         intent.putExtra("id", sectionId);
-
         activityResultLauncher.launch(intent);
     }
 }

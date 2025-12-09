@@ -1,8 +1,6 @@
 package edu.urv.gamifyyourlife;
 
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -56,12 +54,16 @@ public class MyObjectivesRecyclerViewAdapter extends RecyclerView.Adapter<MyObje
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                try {
-                    String s1 = s.toString();
-                    if (!s1.isEmpty()) {
+                String s1 = s.toString();
+                if(s1.trim().isEmpty()) {
+                    holder.mItem.act_value = 0;
+                } else {
+                    try {
                         holder.mItem.act_value = Integer.parseInt(s1);
+                    } catch (Exception e) {
+                        holder.mItem.act_value = 0;
                     }
-                } catch (Exception e) {}
+                }
             }
 
             @Override

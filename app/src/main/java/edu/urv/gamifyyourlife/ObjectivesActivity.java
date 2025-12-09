@@ -6,8 +6,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
-import edu.urv.gamifyyourlife.model.DataSource;
-
 public class ObjectivesActivity extends AppCompatActivity {
 
     public String section_id = "";
@@ -23,11 +21,11 @@ public class ObjectivesActivity extends AppCompatActivity {
 
         ImageView back = findViewById(R.id.background_objectives);
         if(section_id.equals("1")) {
-            back.setImageResource(R.drawable.sections_1); // Health фон
+            back.setImageResource(R.drawable.sections_1);
         } else if(section_id.equals("2")){
-            back.setImageResource(R.drawable.sections_2); // Work фон
+            back.setImageResource(R.drawable.sections_2);
         } else{
-            back.setImageResource(R.drawable.sections_3); // Social фон
+            back.setImageResource(R.drawable.sections_3);
         }
 
         back.setAlpha(0.3f);
@@ -42,9 +40,8 @@ public class ObjectivesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        DataSource.getInstance().Recalculate(section_id);
-
         Intent returnIntent = new Intent();
+        returnIntent.putExtra("id", section_id);
         setResult(RESULT_OK, returnIntent);
         finish();
         super.onBackPressed();
